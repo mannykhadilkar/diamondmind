@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for Softball IQ Simulator */
+
+/* Field visualization styles */
+.field-container {
+  @apply relative w-full max-w-md mx-auto;
+}
+
+/* Animation for feedback */
+@keyframes pulse-correct {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes pulse-incorrect {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.animate-correct {
+  animation: pulse-correct 0.5s ease-in-out;
+}
+
+.animate-incorrect {
+  animation: pulse-incorrect 0.3s ease-in-out;
+}
+
+/* Runner indicator styles */
+.runner-indicator {
+  @apply absolute w-4 h-4 bg-yellow-400 rounded-full border-2 border-yellow-600;
+}
+
+/* Base styles */
+.base {
+  @apply absolute w-6 h-6 bg-white border-2 border-gray-400 transform rotate-45;
+}
