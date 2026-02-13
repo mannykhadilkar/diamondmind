@@ -148,4 +148,172 @@ export const routinePlaysScenarios: Scenario[] = [
       'Center fielder has priority over corner outfielders on fly balls. Call "I got it!" loudly and early, wave off other fielders, and make the catch. Taking charge prevents collisions and confusion.',
     errorVarianceApplies: false,
   },
+  {
+    id: 'rp-8',
+    category: 'routine-plays',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: false, third: false },
+      battedBall: 'ground-ball-middle',
+      fieldPosition: 'shortstop',
+    },
+    question: 'Grounder up the middle, you range to your right to field it. Where do you throw?',
+    options: [
+      { id: 'a', text: 'Set your feet and throw to first', targetBase: 'first' },
+      { id: 'b', text: 'Flip to second base', targetBase: 'second' },
+      { id: 'c', text: 'Throw on the run to first', targetBase: 'first' },
+      { id: 'd', text: 'Hold the ball' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Even when ranging to your right, take the extra split-second to plant your feet before throwing. An accurate throw beats a rushed one. Only throw on the run when absolutely necessary to get the out.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'rp-9',
+    category: 'routine-plays',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: false, third: false },
+      battedBall: 'fly-ball-right',
+      fieldPosition: 'right-field',
+    },
+    question: 'Routine fly ball to right field, no runners. What\'s the proper technique?',
+    options: [
+      { id: 'a', text: 'Catch it above your head with two hands' },
+      { id: 'b', text: 'Basket catch at your waist' },
+      { id: 'c', text: 'One-handed grab for style' },
+      { id: 'd', text: 'Let it bounce once to be safe' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Always catch fly balls above your head with two hands when possible. This gives you the best control and puts you in position to throw quickly if needed. Save the fancy catches for practice.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'rp-10',
+    category: 'routine-plays',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: false, third: false },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'third-base',
+    },
+    question: 'Hard grounder right at you at third base. How do you field it?',
+    options: [
+      { id: 'a', text: 'Get in front, field with two hands, throw to first' },
+      { id: 'b', text: 'Backhand it for quicker release' },
+      { id: 'c', text: 'Knock it down and scramble' },
+      { id: 'd', text: 'Let it go - might be foul' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'On a ball hit right at you, get your body in front and field with two hands. This is the fundamentally sound play. Use backhands only when the ball takes you to your left and you can\'t get in front.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'rp-11',
+    category: 'routine-plays',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: false, third: false },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'first-base',
+    },
+    question: 'Grounder wide of first base. Pitcher is covering. What do you do?',
+    options: [
+      { id: 'a', text: 'Field and flip underhand to the pitcher' },
+      { id: 'b', text: 'Field and race the runner to the bag' },
+      { id: 'c', text: 'Let the second baseman field it' },
+      { id: 'd', text: 'Overhand throw to the pitcher' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'When you field a ball away from first base, flip underhand to the pitcher covering the bag. This is the 3-1 putout. The underhand toss is more accurate than a hard overhand throw at close range.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'rp-12',
+    category: 'routine-plays',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: false, third: false },
+      battedBall: 'line-drive',
+      fieldPosition: 'second-base',
+    },
+    question: 'Line drive hit right at you at second base. What do you do?',
+    options: [
+      { id: 'a', text: 'Catch it for the out' },
+      { id: 'b', text: 'Knock it down first' },
+      { id: 'c', text: 'Duck out of the way' },
+      { id: 'd', text: 'Jump to protect yourself' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'A line drive hit right at you is an out waiting to happen. Square up, use two hands, and catch it. Line drives look scary but if it\'s right at you, that\'s a routine play - don\'t overthink it.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'rp-13',
+    category: 'routine-plays',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: false, third: false },
+      battedBall: 'bunt',
+      fieldPosition: 'third-base',
+    },
+    question: 'Bunt down the third base line, catcher is going too. Who fields it?',
+    options: [
+      { id: 'a', text: 'Third baseman - you\'re charging and can see first base' },
+      { id: 'b', text: 'Catcher - it\'s their territory' },
+      { id: 'c', text: 'Whoever gets there first' },
+      { id: 'd', text: 'Let the pitcher handle it' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Third baseman has priority on bunts down the third base line. You\'re already moving toward the ball and can see first base for the throw. The catcher should peel off when you call for it.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'rp-14',
+    category: 'routine-plays',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: false, third: false },
+      battedBall: 'fly-ball-left',
+      fieldPosition: 'shortstop',
+    },
+    question: 'Short fly ball to shallow left field. You go back, left fielder comes in. Who catches it?',
+    options: [
+      { id: 'a', text: 'Left fielder has priority - outfielder coming in' },
+      { id: 'b', text: 'Shortstop - you\'re an infielder' },
+      { id: 'c', text: 'Whoever calls it first' },
+      { id: 'd', text: 'Let it drop - too confusing' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Outfielders coming IN have priority over infielders going OUT. The left fielder can see the ball better coming forward than you can going backward. Peel off when the outfielder calls for it.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'rp-15',
+    category: 'routine-plays',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: false, third: false },
+      battedBall: 'ground-ball-middle',
+      fieldPosition: 'pitcher',
+    },
+    question: 'Comebacker right to the mound with two outs. What do you do?',
+    options: [
+      { id: 'a', text: 'Field and throw to first', targetBase: 'first' },
+      { id: 'b', text: 'Knock it down and check runners' },
+      { id: 'c', text: 'Let the shortstop field it' },
+      { id: 'd', text: 'Field and toss to second', targetBase: 'second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'A comebacker to the pitcher is one of the easiest plays in baseball. Field it cleanly and throw to first. With two outs, just get the out - no need to rush or complicate things.',
+    errorVarianceApplies: true,
+  },
 ];

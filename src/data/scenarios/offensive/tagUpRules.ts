@@ -145,4 +145,172 @@ export const tagUpRulesScenarios: Scenario[] = [
       'On a deep fly from first base, go halfway! If the ball is caught, you can get back. If it drops, you can likely advance to second or even third. Tagging up from first rarely makes sense - the throw to second is too easy.',
     errorVarianceApplies: false,
   },
+  {
+    id: 'tur-8',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'fly-ball-left',
+      throwDistance: 'medium',
+    },
+    question: 'You\'re on third, no outs. Medium-depth fly to left. What should you do?',
+    options: [
+      { id: 'a', text: 'Tag up and try to score' },
+      { id: 'b', text: 'Stay at third - it\'s not deep enough' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With no outs, be aggressive! A medium-depth fly to left gives the outfielder a long throw home. Tag up and test their arm. Even if it\'s close, the run is valuable and you have two more outs to try again if held.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tur-9',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'fly-ball-center',
+      throwDistance: 'medium',
+    },
+    question: 'You\'re on second, one out. Fly ball to medium center field. What\'s the play?',
+    options: [
+      { id: 'a', text: 'Tag up and advance to third' },
+      { id: 'b', text: 'Go halfway and read it' },
+      { id: 'c', text: 'Stay at second' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'b',
+    explanation:
+      'Go halfway on a medium fly! If it drops, you can make it to third or maybe score. If caught, get back to second. Tagging from second on a medium fly is risky - center fielder has a good angle to third.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tur-10',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'fly-ball-right',
+      throwDistance: 'long',
+    },
+    question: 'Runners on first and second, no outs. Deep fly to right. You\'re on second. What do you do?',
+    options: [
+      { id: 'a', text: 'Tag up and advance to third' },
+      { id: 'b', text: 'Go halfway' },
+      { id: 'c', text: 'Stay at second' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Deep fly to right from second base - tag up! The right fielder has the longest throw to third. If the ball is deep, you can easily advance. Get to third and put yourself in scoring position.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tur-11',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'fly-ball-right',
+      throwDistance: 'short',
+    },
+    question: 'You\'re on third, one out. Short fly ball to right field. What\'s the call?',
+    options: [
+      { id: 'a', text: 'Tag up and try to score' },
+      { id: 'b', text: 'Stay at third after the catch' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'b',
+    explanation:
+      'Short fly to right means a short throw home. Don\'t tag up - you\'ll be thrown out easily. Stay at third and wait for a better opportunity. You still have one more out to score.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tur-12',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: true, third: true },
+      battedBall: 'fly-ball-left',
+      throwDistance: 'long',
+    },
+    question: 'Runners on second and third, no outs. Deep fly to left. What should the runner on third do?',
+    options: [
+      { id: 'a', text: 'Tag up and score after the catch' },
+      { id: 'b', text: 'Stay at third' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Deep fly with no outs - tag and go! The left fielder has a long throw home. Score the run. Even if the runner on second advances to third, getting one run in with no outs is great.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tur-13',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 1,
+      runners: { first: true, second: false, third: true },
+      battedBall: 'fly-ball-center',
+      throwDistance: 'long',
+    },
+    question: 'Runners on corners, one out. Deep fly to center. Runner on third should...',
+    options: [
+      { id: 'a', text: 'Tag up and score' },
+      { id: 'b', text: 'Stay at third - let the other runner advance' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Run immediately on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Score the run! Deep fly means you can tag and easily beat the throw. It doesn\'t matter what the runner on first does - take the run. The center fielder can\'t throw two places at once.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tur-14',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'fly-ball-left',
+      throwDistance: 'short',
+    },
+    question: 'You\'re on second, no outs. Shallow fly ball to left field. What do you do?',
+    options: [
+      { id: 'a', text: 'Tag up and go to third' },
+      { id: 'b', text: 'Go halfway and read it' },
+      { id: 'c', text: 'Stay close to second' },
+      { id: 'd', text: 'Run to third on contact' },
+    ],
+    correctOptionId: 'b',
+    explanation:
+      'On a shallow fly, go halfway. If it drops, you can get to third or even score. If it\'s caught, the throw to third is short - get back to second. Don\'t tag up on shallow flies from second base.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tur-15',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 1,
+      runners: { first: true, second: true, third: true },
+      battedBall: 'fly-ball-center',
+      throwDistance: 'long',
+    },
+    question: 'Bases loaded, one out. Deep fly to center. What should all runners do?',
+    options: [
+      { id: 'a', text: 'All tag up and advance one base' },
+      { id: 'b', text: 'Only runner on third tags up' },
+      { id: 'c', text: 'All stay at their bases' },
+      { id: 'd', text: 'All run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'On a deep fly with one out, everyone tags! The runner on third scores easily. The center fielder can only throw to one place. Runners on first and second should also tag and advance while the throw goes home.',
+    errorVarianceApplies: true,
+  },
 ];

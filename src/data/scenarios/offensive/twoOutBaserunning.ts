@@ -163,4 +163,144 @@ export const twoOutBaserunningScenarios: Scenario[] = [
       'Two outs = run on contact, always! Even on fly balls. If it drops, both runners should score. If it\'s caught, the inning ends regardless. There\'s no benefit to tagging up with two outs.',
     errorVarianceApplies: false,
   },
+  {
+    id: 'tob-9',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: false, third: true },
+      battedBall: 'ground-ball-middle',
+    },
+    question: 'Two outs, runners on corners. Ground ball to shortstop. What should both runners do?',
+    options: [
+      { id: 'a', text: 'Both run on contact' },
+      { id: 'b', text: 'Runner on third stays, runner on first runs' },
+      { id: 'c', text: 'Runner on third runs, runner on first stays' },
+      { id: 'd', text: 'Both stay at their bases' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - both runners go! The shortstop will throw to first or second, and the runner on third can score. The runner on first needs to hustle too. Maximum aggression with two outs, always.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tob-10',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'fly-ball-right',
+    },
+    question: 'Two outs, you\'re on second. Fly ball to right field. What\'s your move?',
+    options: [
+      { id: 'a', text: 'Tag up and advance' },
+      { id: 'b', text: 'Run hard on contact - try to score' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Stay at second' },
+    ],
+    correctOptionId: 'b',
+    explanation:
+      'Two outs - run on contact! If it\'s caught, inning over anyway. If it drops, you need to be running full speed to have a chance to score. Don\'t waste time tagging up with two outs.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tob-11',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'ground-ball-right',
+    },
+    question: 'Two outs, runners on first and second. Grounder to second base. What happens?',
+    options: [
+      { id: 'a', text: 'Both runners sprint - no double play to worry about' },
+      { id: 'b', text: 'Runner on second stays, runner on first runs' },
+      { id: 'c', text: 'Both freeze to see if it\'s fielded' },
+      { id: 'd', text: 'Runner on first gets in a rundown' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Both runners go full speed! With two outs, there\'s no double play threat - any out ends the inning. If the ball gets through or there\'s an error, runs can score. Sprint!',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tob-12',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'bunt',
+    },
+    question: 'Two outs, runner on third. Batter lays down a bunt. What does the runner do?',
+    options: [
+      { id: 'a', text: 'Run home on contact' },
+      { id: 'b', text: 'Stay at third - don\'t get in a rundown' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Wait to see where the throw goes' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - go home! This is called a "two-out squeeze." Even if it\'s a bad bunt, the defense has to make a play. They\'ll usually throw to first. Sprint home and score the run!',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tob-13',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'ground-ball-right',
+    },
+    question: 'Two outs, you\'re on first. Ground ball to first baseman. What do you do?',
+    options: [
+      { id: 'a', text: 'Run hard to second' },
+      { id: 'b', text: 'Stop - they might throw to second' },
+      { id: 'c', text: 'Go back to first' },
+      { id: 'd', text: 'Try to get in a rundown' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Keep running! The first baseman will step on first for the easy out. Your job is to run hard in case there\'s an error. With two outs, never slow down - always assume the best and keep sprinting.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tob-14',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: true, third: true },
+      battedBall: 'ground-ball-left',
+    },
+    question: 'Two outs, runners on second and third. Slow roller to third. What do both runners do?',
+    options: [
+      { id: 'a', text: 'Both run hard - go on contact' },
+      { id: 'b', text: 'Runner on third stays, runner on second goes to third' },
+      { id: 'c', text: 'Both stay' },
+      { id: 'd', text: 'Runner on third goes home only if throw goes to first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - everyone runs! Even on a grounder right at the third baseman. They have to make a decision and can only get one out. Sprint home from third, sprint to third from second. Aggressive!',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tob-15',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: true, third: true },
+      battedBall: 'fly-ball-center',
+    },
+    question: 'Two outs, bases loaded. Fly ball to center field. What should all runners do?',
+    options: [
+      { id: 'a', text: 'All tag up' },
+      { id: 'b', text: 'All run on contact' },
+      { id: 'c', text: 'Only runner on third goes' },
+      { id: 'd', text: 'All freeze and watch' },
+    ],
+    correctOptionId: 'b',
+    explanation:
+      'Two outs - everyone runs on contact! If it\'s caught, inning\'s over. If it drops, with everyone running, you could score 2-3 runs. Never tag up with two outs - always run on contact.',
+    errorVarianceApplies: false,
+  },
 ];
