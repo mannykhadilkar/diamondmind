@@ -1,4 +1,4 @@
-import type { Scenario, CategoryType } from '../../types';
+import type { Scenario, CategoryType, FieldPosition } from '../../types';
 
 // Defensive scenarios
 import { forceVsTagScenarios } from './defensive/forceVsTag';
@@ -62,4 +62,37 @@ export function getScenarioCounts(): Record<CategoryType, number> {
  */
 export function categoryHasScenarios(category: CategoryType): boolean {
   return (scenariosByCategory[category]?.length || 0) > 0;
+}
+
+/**
+ * Get all unique field positions that have scenarios in a category
+ */
+export function getPositionsForCategory(category: CategoryType): FieldPosition[] {
+  const scenarios = scenariosByCategory[category] || [];
+  const positions = new Set<FieldPosition>();
+
+  for (const scenario of scenarios) {
+    if (scenario.situation.fieldPosition) {
+      positions.add(scenario.situation.fieldPosition);
+    }
+  }
+
+  return Array.from(positions);
+}
+
+/**
+ * Filter scenarios by a specific field position
+ * If position is undefined, returns all scenarios (no filtering)
+ */
+export function filterScenariosByPosition(
+  scenarios: Scenario[],
+  position: FieldPosition | undefined
+): Scenario[] {
+  if (!position) {
+    return scenarios;
+  }
+
+  return scenarios.filter(
+    (scenario) => scenario.situation.fieldPosition === position
+  );
 }

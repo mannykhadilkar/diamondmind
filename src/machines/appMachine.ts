@@ -2,11 +2,12 @@ import { setup, assign } from 'xstate';
 import type {
   AppContext,
   CategoryType,
+  FieldPosition,
   UserProgress,
   DrillSession,
 } from '../types';
-import { createEmptyCategoryProgress, evaluateWithVariance } from '../types';
-import { getScenariosByCategory } from '../data/scenarios';
+import { createEmptyCategoryProgress, evaluateWithVariance, CATEGORIES } from '../types';
+import { getScenariosByCategory, filterScenariosByPosition } from '../data/scenarios';
 
 // ============================================
 // MACHINE TYPES
@@ -14,6 +15,8 @@ import { getScenariosByCategory } from '../data/scenarios';
 
 export type AppEvent =
   | { type: 'SELECT_CATEGORY'; category: CategoryType }
+  | { type: 'SELECT_POSITION'; position: FieldPosition | undefined }
+  | { type: 'BACK_TO_CATEGORIES' }
   | { type: 'SUBMIT_ANSWER'; optionId: string }
   | { type: 'NEXT_SCENARIO' }
   | { type: 'RETURN_TO_MENU' }
@@ -29,6 +32,7 @@ const initialContext: AppContext = {
   session: null,
   progress: {},
   lastResult: null,
+  pendingCategory: null,
 };
 
 // ============================================
@@ -75,6 +79,19 @@ export const appMachine = setup({
       progress: () => loadProgressFromStorage(),
     }),
 
+    setPendingCategory: assign(({ event }) => {
+      if (event.type !== 'SELECT_CATEGORY') {
+        return {};
+      }
+      return {
+        pendingCategory: event.category,
+      };
+    }),
+
+    clearPendingCategory: assign(() => ({
+      pendingCategory: null,
+    })),
+
     startDrillSession: assign(({ event }) => {
       if (event.type !== 'SELECT_CATEGORY') {
         return {};
@@ -90,6 +107,27 @@ export const appMachine = setup({
           results: [],
         } satisfies DrillSession,
         lastResult: null,
+      };
+    }),
+
+    startDrillSessionWithPosition: assign(({ context, event }) => {
+      if (event.type !== 'SELECT_POSITION' || !context.pendingCategory) {
+        return {};
+      }
+
+      const allScenarios = getScenariosByCategory(context.pendingCategory);
+      const filteredScenarios = filterScenariosByPosition(allScenarios, event.position);
+
+      return {
+        session: {
+          category: context.pendingCategory,
+          scenarios: shuffleArray(filteredScenarios),
+          currentScenarioIndex: 0,
+          results: [],
+          selectedPosition: event.position,
+        } satisfies DrillSession,
+        lastResult: null,
+        pendingCategory: null,
       };
     }),
 
@@ -180,14 +218,19 @@ export const appMachine = setup({
     restartSession: assign(({ context }) => {
       if (!context.session) return {};
 
-      const scenarios = getScenariosByCategory(context.session.category);
+      const allScenarios = getScenariosByCategory(context.session.category);
+      const filteredScenarios = filterScenariosByPosition(
+        allScenarios,
+        context.session.selectedPosition
+      );
 
       return {
         session: {
           category: context.session.category,
-          scenarios: shuffleArray(scenarios),
+          scenarios: shuffleArray(filteredScenarios),
           currentScenarioIndex: 0,
           results: [],
+          selectedPosition: context.session.selectedPosition,
         },
         lastResult: null,
       };
@@ -213,6 +256,16 @@ export const appMachine = setup({
         context.session !== null && context.session.scenarios.length > 0
       );
     },
+    isDefensiveCategory: ({ event }) => {
+      if (event.type !== 'SELECT_CATEGORY') return false;
+      const category = CATEGORIES.find((c) => c.id === event.category);
+      return category?.type === 'defensive';
+    },
+    isOffensiveCategory: ({ event }) => {
+      if (event.type !== 'SELECT_CATEGORY') return false;
+      const category = CATEGORIES.find((c) => c.id === event.category);
+      return category?.type === 'offensive';
+    },
   },
 }).createMachine({
   id: 'softballIQ',
@@ -229,11 +282,33 @@ export const appMachine = setup({
     // Category selection screen
     idle: {
       on: {
-        SELECT_CATEGORY: {
-          target: 'drilling',
-          actions: 'startDrillSession',
-        },
+        SELECT_CATEGORY: [
+          {
+            target: 'selectingPosition',
+            guard: 'isDefensiveCategory',
+            actions: 'setPendingCategory',
+          },
+          {
+            target: 'drilling',
+            guard: 'isOffensiveCategory',
+            actions: 'startDrillSession',
+          },
+        ],
         REVIEW_PROGRESS: 'reviewingProgress',
+      },
+    },
+
+    // Position selection for defensive categories
+    selectingPosition: {
+      on: {
+        SELECT_POSITION: {
+          target: 'drilling',
+          actions: 'startDrillSessionWithPosition',
+        },
+        BACK_TO_CATEGORIES: {
+          target: 'idle',
+          actions: 'clearPendingCategory',
+        },
       },
     },
 

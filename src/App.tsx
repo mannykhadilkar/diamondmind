@@ -3,26 +3,28 @@ import { useState } from 'react';
 import { appMachine } from './machines/appMachine';
 import {
   CategorySelect,
+  PositionSelector,
   ScenarioDisplay,
   DecisionInput,
   FeedbackPanel,
   MasteryStats,
 } from './components';
 import { categoryHasScenarios, getScenarioCounts } from './data/scenarios';
-import type { CategoryType } from './types';
+import type { CategoryType, FieldPosition } from './types';
 import { CATEGORIES } from './types';
 
 function App() {
   const [state, send] = useMachine(appMachine);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const { session, progress, lastResult } = state.context;
+  const { session, progress, lastResult, pendingCategory } = state.context;
 
   // Get current scenario if in a drilling session
   const currentScenario = session?.scenarios[session.currentScenarioIndex];
 
   // Determine which view to show based on state
   const isIdle = state.matches('idle');
+  const isSelectingPosition = state.matches('selectingPosition');
   const isDrilling = state.matches('drilling');
   const isPresentingScenario = state.matches({ drilling: 'presentingScenario' });
   const isShowingFeedback = state.matches({ drilling: 'showingFeedback' });
@@ -61,6 +63,16 @@ function App() {
   const handlePlayAgain = () => {
     setSelectedOption(null);
     send({ type: 'PLAY_AGAIN' });
+  };
+
+  // Handle position selection
+  const handleSelectPosition = (position: FieldPosition | undefined) => {
+    send({ type: 'SELECT_POSITION', position });
+  };
+
+  // Handle back to categories from position selection
+  const handleBackToCategories = () => {
+    send({ type: 'BACK_TO_CATEGORIES' });
   };
 
   // Get scenario counts for display
@@ -130,6 +142,15 @@ function App() {
               onSelectCategory={handleSelectCategory}
             />
           </div>
+        )}
+
+        {/* SELECTING POSITION STATE - Position Selection */}
+        {isSelectingPosition && pendingCategory && (
+          <PositionSelector
+            category={pendingCategory}
+            onSelectPosition={handleSelectPosition}
+            onBack={handleBackToCategories}
+          />
         )}
 
         {/* DRILLING STATE - Presenting Scenario */}

@@ -123,6 +123,19 @@ export const POSITION_NUMBERS: Record<FieldPosition, number> = {
   'right-field': 9,
 };
 
+// Position display names
+export const POSITION_NAMES: Record<FieldPosition, string> = {
+  'pitcher': 'Pitcher',
+  'catcher': 'Catcher',
+  'first-base': '1st Base',
+  'second-base': '2nd Base',
+  'third-base': '3rd Base',
+  'shortstop': 'Shortstop',
+  'left-field': 'Left Field',
+  'center-field': 'Center Field',
+  'right-field': 'Right Field',
+};
+
 // ============================================
 // SCENARIO TYPES
 // ============================================
@@ -214,6 +227,7 @@ export interface DrillSession {
   scenarios: Scenario[];
   currentScenarioIndex: number;
   results: EvaluationResult[];
+  selectedPosition?: FieldPosition; // Optional position filter for defensive drills
 }
 
 export interface AppContext {
@@ -223,6 +237,8 @@ export interface AppContext {
   progress: UserProgress;
   // Last evaluation result (for showing feedback)
   lastResult: EvaluationResult | null;
+  // Pending category for position selection (defensive categories only)
+  pendingCategory: CategoryType | null;
 }
 
 // ============================================
