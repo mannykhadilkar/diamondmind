@@ -2,39 +2,367 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for Softball IQ Simulator */
+/* Custom styles for Softball IQ Simulator - Bold Sports Theme */
 
-/* Field visualization styles */
+/* ============================================
+   FIELD VISUALIZATION STYLES
+   ============================================ */
+
 .field-container {
-  @apply relative w-full max-w-md mx-auto;
-}
-
-/* Animation for feedback */
-@keyframes pulse-correct {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes pulse-incorrect {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-
-.animate-correct {
-  animation: pulse-correct 0.5s ease-in-out;
-}
-
-.animate-incorrect {
-  animation: pulse-incorrect 0.3s ease-in-out;
+  @apply relative w-full max-w-lg mx-auto;
 }
 
 /* Runner indicator styles */
 .runner-indicator {
-  @apply absolute w-4 h-4 bg-yellow-400 rounded-full border-2 border-yellow-600;
+  @apply absolute w-5 h-5 bg-team-gold rounded-full border-2 border-yellow-600;
+  animation: runnerPulse 1.5s ease-in-out infinite;
 }
 
 /* Base styles */
 .base {
-  @apply absolute w-6 h-6 bg-white border-2 border-gray-400 transform rotate-45;
+  @apply absolute w-7 h-7 bg-white border-2 border-gray-300 transform rotate-45;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   ENTRANCE ANIMATIONS
+   ============================================ */
+
+@keyframes slideUpEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUpEntrance 0.4s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.4s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Staggered entrance delays for children */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+
+/* ============================================
+   FEEDBACK ANIMATIONS
+   ============================================ */
+
+@keyframes bounceCorrect {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.08); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-10px); }
+  30% { transform: translateX(10px); }
+  45% { transform: translateX(-8px); }
+  60% { transform: translateX(8px); }
+  75% { transform: translateX(-4px); }
+  90% { transform: translateX(4px); }
+}
+
+.animate-correct {
+  animation: bounceCorrect 0.5s ease-out;
+}
+
+.animate-incorrect {
+  animation: shakeError 0.5s ease-out;
+}
+
+/* ============================================
+   GLOW EFFECTS
+   ============================================ */
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(245, 158, 11, 0.8);
+  }
+}
+
+@keyframes glowPulseBlue {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(30, 64, 175, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(30, 64, 175, 0.8);
+  }
+}
+
+@keyframes glowPulseGreen {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.8);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+.animate-glow-pulse-blue {
+  animation: glowPulseBlue 2s ease-in-out infinite;
+}
+
+.animate-glow-pulse-green {
+  animation: glowPulseGreen 2s ease-in-out infinite;
+}
+
+/* ============================================
+   FIELD ANIMATIONS
+   ============================================ */
+
+@keyframes runnerPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 4px rgba(245, 158, 11, 0.5);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.8);
+  }
+}
+
+@keyframes fielderHighlight {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.9));
+  }
+}
+
+@keyframes ballGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(220, 38, 38, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.9));
+  }
+}
+
+.animate-fielder-highlight {
+  animation: fielderHighlight 1.5s ease-in-out infinite;
+}
+
+.animate-ball-glow {
+  animation: ballGlow 1s ease-in-out infinite;
+}
+
+/* ============================================
+   BUTTON & CARD EFFECTS
+   ============================================ */
+
+.btn-gradient-primary {
+  @apply bg-gradient-to-r from-team-blue to-defensive-accent text-white font-bold;
+  @apply rounded-lg transition-all duration-200;
+  @apply hover:shadow-glow-blue hover:scale-[1.02];
+  @apply active:scale-[0.98];
+}
+
+.btn-gradient-action {
+  @apply bg-gradient-to-r from-team-gold to-yellow-400 text-gray-900 font-bold;
+  @apply rounded-lg transition-all duration-200;
+  @apply hover:shadow-glow-gold hover:scale-[1.02];
+  @apply active:scale-[0.98];
+}
+
+.btn-gradient-success {
+  @apply bg-gradient-to-r from-correct to-emerald-400 text-white font-bold;
+  @apply rounded-lg transition-all duration-200;
+  @apply hover:shadow-glow-green hover:scale-[1.02];
+  @apply active:scale-[0.98];
+}
+
+.btn-gradient-danger {
+  @apply bg-gradient-to-r from-team-red to-red-500 text-white font-bold;
+  @apply rounded-lg transition-all duration-200;
+  @apply hover:shadow-glow-red hover:scale-[1.02];
+  @apply active:scale-[0.98];
+}
+
+.card-sports {
+  @apply bg-gray-800 rounded-xl overflow-hidden;
+  @apply border border-gray-700;
+  @apply transition-all duration-300;
+  @apply hover:border-gray-600 hover:shadow-card-hover;
+  @apply hover:transform hover:scale-[1.02];
+}
+
+.card-defensive {
+  @apply card-sports;
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.2) 0%, rgba(14, 165, 233, 0.1) 100%);
+  @apply hover:border-defensive-accent;
+}
+
+.card-offensive {
+  @apply card-sports;
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
+  @apply hover:border-offensive-accent;
+}
+
+/* Diagonal stripe overlay for sports feel */
+.stripe-overlay {
+  position: relative;
+}
+
+.stripe-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.02) 10px,
+    rgba(255, 255, 255, 0.02) 20px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ============================================
+   PROGRESS INDICATORS
+   ============================================ */
+
+.progress-bar-enhanced {
+  @apply h-2 rounded-full overflow-hidden;
+  background: rgba(55, 65, 81, 0.8);
+}
+
+.progress-bar-enhanced .progress-fill {
+  @apply h-full rounded-full transition-all duration-500;
+  background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+.progress-bar-enhanced.success .progress-fill {
+  background: linear-gradient(90deg, #16a34a 0%, #22c55e 100%);
+}
+
+.progress-bar-enhanced.danger .progress-fill {
+  background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+}
+
+/* Circular progress indicator */
+.circular-progress {
+  transform: rotate(-90deg);
+}
+
+.circular-progress-bg {
+  stroke: #374151;
+}
+
+.circular-progress-fill {
+  transition: stroke-dasharray 0.8s ease-out;
+}
+
+/* ============================================
+   TYPOGRAPHY SCALE
+   ============================================ */
+
+.text-hero {
+  @apply text-3xl md:text-4xl font-bold tracking-tight;
+}
+
+.text-section {
+  @apply text-xl md:text-2xl font-bold;
+}
+
+.text-body {
+  @apply text-base text-gray-300;
+}
+
+.text-caption {
+  @apply text-sm text-gray-400;
+}
+
+/* ============================================
+   TAB NAVIGATION
+   ============================================ */
+
+.tab-pill {
+  @apply px-6 py-3 rounded-full font-bold text-sm transition-all duration-200;
+  @apply border-2 border-transparent;
+}
+
+.tab-pill-defensive {
+  @apply hover:bg-defensive-primary/20 hover:border-defensive-accent;
+}
+
+.tab-pill-defensive.active {
+  @apply bg-gradient-defensive text-white border-transparent shadow-glow-blue;
+}
+
+.tab-pill-offensive {
+  @apply hover:bg-offensive-primary/20 hover:border-offensive-accent;
+}
+
+.tab-pill-offensive.active {
+  @apply bg-gradient-offensive text-white border-transparent shadow-glow-red;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+
+@media (max-width: 320px) {
+  .text-hero {
+    @apply text-2xl;
+  }
+
+  .text-section {
+    @apply text-lg;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-categories {
+    @apply grid-cols-2 gap-6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-categories {
+    @apply grid-cols-3;
+  }
 }

@@ -1,4 +1,6 @@
+export { BaseSelector } from './BaseSelector';
 export { CategorySelect } from './CategorySelect';
+export { Dashboard } from './Dashboard';
 export { DecisionInput } from './DecisionInput';
 export { FeedbackPanel } from './FeedbackPanel';
 export { FieldVisualization } from './FieldVisualization';

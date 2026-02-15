@@ -21,32 +21,43 @@ export function DecisionInput({
 }: DecisionInputProps) {
   const getButtonClasses = (option: Option) => {
     const baseClasses = `
-      w-full p-4 rounded-lg text-left transition-all duration-200
+      w-full p-4 rounded-xl text-left transition-all duration-300
       border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900
     `;
 
     if (showResult && correctOptionId) {
       // Showing results
       if (option.id === correctOptionId) {
-        return `${baseClasses} bg-green-900 border-green-500 text-green-100`;
+        return `${baseClasses}
+          bg-gradient-to-r from-correct-dark to-correct
+          border-correct text-white
+          animate-bounce-correct shadow-glow-green`;
       }
       if (option.id === selectedOptionId && option.id !== correctOptionId) {
-        return `${baseClasses} bg-red-900 border-red-500 text-red-100`;
+        return `${baseClasses}
+          bg-gradient-to-r from-incorrect-dark to-incorrect
+          border-incorrect text-white
+          animate-shake-error shadow-glow-red`;
       }
-      return `${baseClasses} bg-gray-800 border-gray-700 text-gray-400 opacity-60`;
+      return `${baseClasses} bg-gray-800/50 border-gray-700 text-gray-500 opacity-50`;
     }
 
     if (selectedOptionId === option.id) {
-      return `${baseClasses} bg-blue-900 border-blue-500 text-blue-100`;
+      return `${baseClasses}
+        bg-gradient-to-r from-team-blue to-defensive-accent
+        border-defensive-accent text-white
+        shadow-glow-blue transform scale-[1.02]`;
     }
 
     if (disabled) {
       return `${baseClasses} bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed`;
     }
 
-    return `${baseClasses} bg-gray-800 border-gray-700 text-white
-            hover:bg-gray-750 hover:border-gray-600 cursor-pointer
-            focus:ring-blue-500`;
+    return `${baseClasses}
+      bg-gray-800 border-gray-700 text-white
+      hover:bg-gray-750 hover:border-gray-500
+      hover:shadow-lg hover:transform hover:scale-[1.01]
+      cursor-pointer focus:ring-team-gold`;
   };
 
   const getIcon = (option: Option) => {
@@ -54,12 +65,16 @@ export function DecisionInput({
 
     if (option.id === correctOptionId) {
       return (
-        <span className="text-green-400 text-xl">✓</span>
+        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 text-white text-2xl">
+          ✓
+        </span>
       );
     }
     if (option.id === selectedOptionId && option.id !== correctOptionId) {
       return (
-        <span className="text-red-400 text-xl">✗</span>
+        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 text-white text-2xl">
+          ✗
+        </span>
       );
     }
     return null;
@@ -70,33 +85,47 @@ export function DecisionInput({
     return String.fromCharCode(65 + index); // A, B, C, D...
   };
 
+  const getBadgeClasses = (option: Option) => {
+    const baseClasses = `
+      w-10 h-10 rounded-full flex items-center justify-center
+      text-base font-bold transition-all duration-300
+    `;
+
+    if (showResult && correctOptionId) {
+      if (option.id === correctOptionId) {
+        return `${baseClasses} bg-white/30 text-white`;
+      }
+      if (option.id === selectedOptionId) {
+        return `${baseClasses} bg-white/30 text-white`;
+      }
+      return `${baseClasses} bg-gray-700 text-gray-500`;
+    }
+
+    if (selectedOptionId === option.id) {
+      return `${baseClasses} bg-white/30 text-white`;
+    }
+
+    return `${baseClasses} bg-gray-700 text-gray-300 group-hover:bg-gray-600`;
+  };
+
   return (
-    <div className={`space-y-3 ${className}`}>
+    <div className={`space-y-4 ${className}`}>
       {options.map((option, index) => (
         <button
           key={option.id}
           onClick={() => !disabled && onSelect(option.id)}
           disabled={disabled}
-          className={getButtonClasses(option)}
+          className={`${getButtonClasses(option)} group animate-slide-up`}
+          style={{ animationDelay: `${index * 50}ms` }}
         >
-          <div className="flex items-center gap-3">
-            {/* Option letter */}
-            <span
-              className={`
-                w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold
-                ${showResult && option.id === correctOptionId
-                  ? 'bg-green-700 text-green-100'
-                  : showResult && option.id === selectedOptionId
-                    ? 'bg-red-700 text-red-100'
-                    : 'bg-gray-700 text-gray-300'
-                }
-              `}
-            >
+          <div className="flex items-center gap-4">
+            {/* Option letter badge */}
+            <span className={getBadgeClasses(option)}>
               {getOptionLetter(index)}
             </span>
 
             {/* Option text */}
-            <span className="flex-1 font-medium">{option.text}</span>
+            <span className="flex-1 font-semibold text-base">{option.text}</span>
 
             {/* Result icon */}
             {getIcon(option)}
@@ -104,8 +133,9 @@ export function DecisionInput({
 
           {/* Target base indicator if present */}
           {option.targetBase && (
-            <div className="mt-2 ml-11 text-xs text-gray-400">
-              → Throw to {option.targetBase}
+            <div className="mt-3 ml-14 text-sm text-gray-400 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-team-gold rounded-full"></span>
+              Throw to {option.targetBase}
             </div>
           )}
         </button>

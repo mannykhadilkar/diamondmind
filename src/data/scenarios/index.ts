@@ -1,4 +1,4 @@
-import type { Scenario, CategoryType, FieldPosition } from '../../types';
+import type { Scenario, CategoryType, FieldPosition, RunnerBase } from '../../types';
 
 // Defensive scenarios
 import { forceVsTagScenarios } from './defensive/forceVsTag';
@@ -95,4 +95,33 @@ export function filterScenariosByPosition(
   return scenarios.filter(
     (scenario) => scenario.situation.fieldPosition === position
   );
+}
+
+/**
+ * Filter scenarios by a specific runner base (for offensive drills)
+ * If base is undefined, returns all scenarios (no filtering)
+ * Filters based on which base has a runner in the situation
+ */
+export function filterScenariosByBase(
+  scenarios: Scenario[],
+  base: RunnerBase | undefined
+): Scenario[] {
+  if (!base) {
+    return scenarios;
+  }
+
+  return scenarios.filter((scenario) => {
+    const { runners } = scenario.situation;
+    // Filter scenarios where the player is on the specified base
+    switch (base) {
+      case 'first':
+        return runners.first;
+      case 'second':
+        return runners.second;
+      case 'third':
+        return runners.third;
+      default:
+        return true;
+    }
+  });
 }

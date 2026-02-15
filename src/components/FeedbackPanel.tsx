@@ -24,32 +24,36 @@ export function FeedbackPanel({
           icon: '✓',
           title: 'Correct!',
           subtitle: 'Great decision.',
-          bgClass: 'bg-green-900 border-green-700',
-          iconBgClass: 'bg-green-700',
+          gradientClass: 'bg-gradient-correct',
+          iconBgClass: 'bg-white/20',
+          glowClass: 'shadow-glow-green',
         };
       case 'incorrect':
         return {
           icon: '✗',
           title: 'Not Quite',
           subtitle: "Let's review the correct play.",
-          bgClass: 'bg-red-900 border-red-700',
-          iconBgClass: 'bg-red-700',
+          gradientClass: 'bg-gradient-incorrect',
+          iconBgClass: 'bg-white/20',
+          glowClass: 'shadow-glow-red',
         };
       case 'correct_but_error':
         return {
           icon: '⚠',
           title: 'Right Decision!',
           subtitle: 'But a fielder error occurred.',
-          bgClass: 'bg-yellow-900 border-yellow-700',
-          iconBgClass: 'bg-yellow-700',
+          gradientClass: 'bg-gradient-gold',
+          iconBgClass: 'bg-white/20',
+          glowClass: 'shadow-glow-gold',
         };
       case 'incorrect_but_error':
         return {
           icon: '✗',
           title: 'Not the Best Choice',
           subtitle: 'Plus there was a fielder error.',
-          bgClass: 'bg-red-900 border-red-700',
-          iconBgClass: 'bg-red-700',
+          gradientClass: 'bg-gradient-incorrect',
+          iconBgClass: 'bg-white/20',
+          glowClass: 'shadow-glow-red',
         };
     }
   };
@@ -57,49 +61,52 @@ export function FeedbackPanel({
   const header = getHeaderContent();
 
   return (
-    <div className={`rounded-lg overflow-hidden ${className}`}>
+    <div className={`rounded-xl overflow-hidden animate-slide-up ${header.glowClass} ${className}`}>
       {/* Result Header */}
-      <div className={`${header.bgClass} border-b p-4`}>
-        <div className="flex items-center gap-3">
+      <div className={`${header.gradientClass} p-5`}>
+        <div className="flex items-center gap-4">
           <span
-            className={`${header.iconBgClass} w-10 h-10 rounded-full flex items-center justify-center text-xl`}
+            className={`${header.iconBgClass} w-14 h-14 rounded-full flex items-center justify-center text-3xl text-white`}
           >
             {header.icon}
           </span>
           <div>
-            <h3 className="text-lg font-bold text-white">{header.title}</h3>
-            <p className="text-sm text-gray-300">{header.subtitle}</p>
+            <h3 className="text-xl font-bold text-white">{header.title}</h3>
+            <p className="text-sm text-white/80">{header.subtitle}</p>
           </div>
         </div>
 
         {/* Error message if applicable */}
         {result.errorOccurred && result.message && (
-          <div className="mt-3 p-2 bg-black/20 rounded text-sm text-yellow-200">
-            ⚡ {result.message}
+          <div className="mt-4 p-3 bg-black/20 rounded-lg text-sm text-white/90 flex items-center gap-2">
+            <span className="text-lg">⚡</span>
+            {result.message}
           </div>
         )}
       </div>
 
       {/* Explanation */}
-      <div className="bg-gray-800 p-4">
-        <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
+      <div className="bg-gray-800 p-5 border-l-4 border-team-gold">
+        <h4 className="text-sm font-bold text-team-gold uppercase tracking-wider mb-3 flex items-center gap-2">
+          <span className="w-2 h-2 bg-team-gold rounded-full"></span>
           Explanation
         </h4>
-        <p className="text-white leading-relaxed">{explanation}</p>
+        <p className="text-white leading-relaxed text-base">{explanation}</p>
       </div>
 
       {/* Action Buttons */}
-      <div className="bg-gray-800 border-t border-gray-700 p-4 flex gap-3">
+      <div className="bg-gray-800 border-t border-gray-700 p-5 flex gap-4">
         <button
           onClick={onReturnToMenu}
-          className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+          className="px-5 py-3 text-gray-400 hover:text-white transition-all duration-200
+                     hover:bg-gray-700 rounded-lg font-medium"
         >
           Exit Drill
         </button>
         <button
           onClick={onNext}
-          className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white
-                     font-semibold rounded-lg transition-colors"
+          className="flex-1 px-6 py-3 btn-gradient-action rounded-lg
+                     font-bold text-base animate-glow-pulse"
         >
           {isLastScenario ? 'See Results' : 'Next Scenario →'}
         </button>

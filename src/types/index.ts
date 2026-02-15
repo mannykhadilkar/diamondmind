@@ -110,6 +110,15 @@ export type FieldPosition =
   | 'center-field' // 8
   | 'right-field'; // 9
 
+// Runner base for offensive drills (which base the player is practicing from)
+export type RunnerBase = 'first' | 'second' | 'third';
+
+export const BASE_NAMES: Record<RunnerBase, string> = {
+  'first': '1st Base',
+  'second': '2nd Base',
+  'third': '3rd Base',
+};
+
 // Position numbers for display
 export const POSITION_NUMBERS: Record<FieldPosition, number> = {
   'pitcher': 1,
@@ -228,6 +237,7 @@ export interface DrillSession {
   currentScenarioIndex: number;
   results: EvaluationResult[];
   selectedPosition?: FieldPosition; // Optional position filter for defensive drills
+  selectedBase?: RunnerBase; // Optional base filter for offensive drills
 }
 
 export interface AppContext {
