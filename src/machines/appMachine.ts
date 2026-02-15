@@ -3,11 +3,12 @@ import type {
   AppContext,
   CategoryType,
   FieldPosition,
+  RunnerBase,
   UserProgress,
   DrillSession,
 } from '../types';
 import { createEmptyCategoryProgress, evaluateWithVariance, CATEGORIES } from '../types';
-import { getScenariosByCategory, filterScenariosByPosition } from '../data/scenarios';
+import { getScenariosByCategory, filterScenariosByPosition, filterScenariosByBase } from '../data/scenarios';
 
 // ============================================
 // MACHINE TYPES
@@ -16,13 +17,14 @@ import { getScenariosByCategory, filterScenariosByPosition } from '../data/scena
 export type AppEvent =
   | { type: 'SELECT_CATEGORY'; category: CategoryType }
   | { type: 'SELECT_POSITION'; position: FieldPosition | undefined }
+  | { type: 'SELECT_BASE'; base: RunnerBase | undefined }
   | { type: 'BACK_TO_CATEGORIES' }
   | { type: 'SUBMIT_ANSWER'; optionId: string }
   | { type: 'NEXT_SCENARIO' }
   | { type: 'RETURN_TO_MENU' }
   | { type: 'PLAY_AGAIN' }
-  | { type: 'REVIEW_PROGRESS' }
-  | { type: 'CLOSE_REVIEW' };
+  | { type: 'VIEW_DASHBOARD' }
+  | { type: 'CLOSE_DASHBOARD' };
 
 // ============================================
 // INITIAL CONTEXT
@@ -131,6 +133,27 @@ export const appMachine = setup({
       };
     }),
 
+    startDrillSessionWithBase: assign(({ context, event }) => {
+      if (event.type !== 'SELECT_BASE' || !context.pendingCategory) {
+        return {};
+      }
+
+      const allScenarios = getScenariosByCategory(context.pendingCategory);
+      const filteredScenarios = filterScenariosByBase(allScenarios, event.base);
+
+      return {
+        session: {
+          category: context.pendingCategory,
+          scenarios: shuffleArray(filteredScenarios),
+          currentScenarioIndex: 0,
+          results: [],
+          selectedBase: event.base,
+        } satisfies DrillSession,
+        lastResult: null,
+        pendingCategory: null,
+      };
+    }),
+
     evaluateAnswer: assign(({ context, event }) => {
       if (event.type !== 'SUBMIT_ANSWER' || !context.session) {
         return {};
@@ -219,10 +242,14 @@ export const appMachine = setup({
       if (!context.session) return {};
 
       const allScenarios = getScenariosByCategory(context.session.category);
-      const filteredScenarios = filterScenariosByPosition(
-        allScenarios,
-        context.session.selectedPosition
-      );
+
+      // Filter by position (defensive) or base (offensive)
+      let filteredScenarios = allScenarios;
+      if (context.session.selectedPosition !== undefined) {
+        filteredScenarios = filterScenariosByPosition(allScenarios, context.session.selectedPosition);
+      } else if (context.session.selectedBase !== undefined) {
+        filteredScenarios = filterScenariosByBase(allScenarios, context.session.selectedBase);
+      }
 
       return {
         session: {
@@ -231,6 +258,7 @@ export const appMachine = setup({
           currentScenarioIndex: 0,
           results: [],
           selectedPosition: context.session.selectedPosition,
+          selectedBase: context.session.selectedBase,
         },
         lastResult: null,
       };
@@ -289,12 +317,12 @@ export const appMachine = setup({
             actions: 'setPendingCategory',
           },
           {
-            target: 'drilling',
+            target: 'selectingBase',
             guard: 'isOffensiveCategory',
-            actions: 'startDrillSession',
+            actions: 'setPendingCategory',
           },
         ],
-        REVIEW_PROGRESS: 'reviewingProgress',
+        VIEW_DASHBOARD: 'viewingDashboard',
       },
     },
 
@@ -304,6 +332,20 @@ export const appMachine = setup({
         SELECT_POSITION: {
           target: 'drilling',
           actions: 'startDrillSessionWithPosition',
+        },
+        BACK_TO_CATEGORIES: {
+          target: 'idle',
+          actions: 'clearPendingCategory',
+        },
+      },
+    },
+
+    // Base selection for offensive categories
+    selectingBase: {
+      on: {
+        SELECT_BASE: {
+          target: 'drilling',
+          actions: 'startDrillSessionWithBase',
         },
         BACK_TO_CATEGORIES: {
           target: 'idle',
@@ -366,14 +408,22 @@ export const appMachine = setup({
       },
     },
 
-    // Viewing overall progress
-    reviewingProgress: {
+    // Viewing dashboard / overall progress
+    viewingDashboard: {
       on: {
-        CLOSE_REVIEW: 'idle',
-        SELECT_CATEGORY: {
-          target: 'drilling',
-          actions: 'startDrillSession',
-        },
+        CLOSE_DASHBOARD: 'idle',
+        SELECT_CATEGORY: [
+          {
+            target: 'selectingPosition',
+            guard: 'isDefensiveCategory',
+            actions: 'setPendingCategory',
+          },
+          {
+            target: 'selectingBase',
+            guard: 'isOffensiveCategory',
+            actions: 'setPendingCategory',
+          },
+        ],
       },
     },
   },
