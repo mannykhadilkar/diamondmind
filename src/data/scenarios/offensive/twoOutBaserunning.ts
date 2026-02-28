@@ -303,4 +303,208 @@ export const twoOutBaserunningScenarios: Scenario[] = [
       'Two outs - everyone runs on contact! If it\'s caught, inning\'s over. If it drops, with everyone running, you could score 2-3 runs. Never tag up with two outs - always run on contact.',
     errorVarianceApplies: false,
   },
+  // Additional scenarios for First Base runners
+  {
+    id: 'tob-16',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'ground-ball-middle',
+    },
+    question: 'Two outs, you\'re on first. Grounder up the middle. What do you do?',
+    options: [
+      { id: 'a', text: 'Run hard - try to get to third if it gets through' },
+      { id: 'b', text: 'Stop at second' },
+      { id: 'c', text: 'Wait to see if it\'s fielded' },
+      { id: 'd', text: 'Stay close to first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - be aggressive! If the ball gets through, you want to be at third (scoring position). Run hard on contact and read the play. Push for every base!',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tob-17',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'line-drive',
+    },
+    question: 'Two outs, you\'re on first. Line drive hit. What\'s different with two outs?',
+    options: [
+      { id: 'a', text: 'Run on contact - if caught, inning\'s over anyway' },
+      { id: 'b', text: 'Freeze like normal' },
+      { id: 'c', text: 'Tag up' },
+      { id: 'd', text: 'Go halfway' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs changes the line drive rule! Normally you freeze, but with two outs, RUN! If it\'s caught, inning\'s over. If it drops, you need to be running to score.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tob-18',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'fly-ball-center',
+    },
+    question: 'Two outs, you\'re on first. Fly ball to deep center. What\'s the rule?',
+    options: [
+      { id: 'a', text: 'Run on contact - no tagging with two outs' },
+      { id: 'b', text: 'Tag up like normal' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Stay at first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - run on EVERYTHING! Fly ball? Run! If caught, inning over. If dropped, you could score. Don\'t waste time tagging when there are two outs.',
+    errorVarianceApplies: false,
+  },
+  // Additional scenarios for Second Base runners
+  {
+    id: 'tob-19',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'ground-ball-right',
+    },
+    question: 'Two outs, you\'re on second. Grounder to first baseman. What do you do?',
+    options: [
+      { id: 'a', text: 'Run! Try to score while they get the out at first' },
+      { id: 'b', text: 'Stop at third' },
+      { id: 'c', text: 'Stay at second' },
+      { id: 'd', text: 'Go halfway' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - be aggressive! The first baseman will likely step on first for the easy out. Sprint home - you can score on any ground ball with two outs.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tob-20',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'ground-ball-left',
+    },
+    question: 'Two outs, you\'re on second. Grounder to shortstop. What\'s your move?',
+    options: [
+      { id: 'a', text: 'Run hard - you might score on the throw to first' },
+      { id: 'b', text: 'Stay at second' },
+      { id: 'c', text: 'Go to third only' },
+      { id: 'd', text: 'Freeze and watch' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs changes everything! Run hard toward home. The shortstop will likely throw to first - that\'s your chance to score. Be aggressive!',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tob-21',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'fly-ball-left',
+    },
+    question: 'Two outs, you\'re on second. Fly ball to left field. How do you run?',
+    options: [
+      { id: 'a', text: 'Run on contact - full speed toward third and home' },
+      { id: 'b', text: 'Tag up' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Stay at second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - run on contact! If caught, inning\'s over. If it drops, you need to be sprinting to have a chance to score. No tagging with two outs.',
+    errorVarianceApplies: false,
+  },
+  // Additional scenarios for Third Base runners
+  {
+    id: 'tob-22',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'ground-ball-left',
+    },
+    question: 'Two outs, you\'re on third. Grounder to shortstop. What do you do?',
+    options: [
+      { id: 'a', text: 'Sprint home on contact - score on the throw to first' },
+      { id: 'b', text: 'Stay at third' },
+      { id: 'c', text: 'Go halfway and read' },
+      { id: 'd', text: 'Wait for the throw' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - GO! The shortstop will throw to first to end the inning. Sprint home and score! With two outs, you run on contact no matter what.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tob-23',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'fly-ball-right',
+    },
+    question: 'Two outs, you\'re on third. Fly ball to right field. What\'s the play?',
+    options: [
+      { id: 'a', text: 'Run on contact' },
+      { id: 'b', text: 'Tag up' },
+      { id: 'c', text: 'Stay at third' },
+      { id: 'd', text: 'Go halfway' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - run on contact! No tagging needed. If caught, game over anyway. If dropped, you need to be running to score. Full speed!',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tob-24',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'ground-ball-middle',
+    },
+    question: 'Two outs, you\'re on third. Comebacker to pitcher. What do you do?',
+    options: [
+      { id: 'a', text: 'Sprint home - pitcher will throw to first' },
+      { id: 'b', text: 'Stay at third' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Fake and go back' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - GO! Even on a comebacker to the pitcher. They\'ll throw to first for the out. Sprint home and score the run!',
+    errorVarianceApplies: true,
+  },
+  // Multiple runner situations
+  {
+    id: 'tob-25',
+    category: 'two-out-baserunning',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'ground-ball-middle',
+    },
+    question: 'Two outs, runners on first and second. Grounder up the middle. You\'re on second. What do you do?',
+    options: [
+      { id: 'a', text: 'Run hard - try to score on any base hit' },
+      { id: 'b', text: 'Stop at third' },
+      { id: 'c', text: 'Stay at second' },
+      { id: 'd', text: 'Tag up' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - maximum aggression! If the ball gets through, you should score. If it\'s fielded, they\'ll throw to first and the inning ends. Run hard!',
+    errorVarianceApplies: true,
+  },
 ];

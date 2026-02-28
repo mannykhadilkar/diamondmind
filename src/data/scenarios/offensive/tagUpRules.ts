@@ -313,4 +313,218 @@ export const tagUpRulesScenarios: Scenario[] = [
       'On a deep fly with one out, everyone tags! The runner on third scores easily. The center fielder can only throw to one place. Runners on first and second should also tag and advance while the throw goes home.',
     errorVarianceApplies: true,
   },
+  // Additional scenarios for First Base tagging
+  {
+    id: 'tur-16',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'fly-ball-center',
+      throwDistance: 'long',
+    },
+    question: 'You\'re on first, no outs. Deep fly ball to center. What\'s your move?',
+    options: [
+      { id: 'a', text: 'Go halfway and read the play' },
+      { id: 'b', text: 'Tag up and advance to second after catch' },
+      { id: 'c', text: 'Run to second immediately' },
+      { id: 'd', text: 'Stay at first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'On a deep fly from first, go halfway. If it\'s caught, get back. If it drops, advance to second or third. Tagging from first base to second rarely makes sense - the throw is too short.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tur-17',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 1,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'fly-ball-left',
+      throwDistance: 'short',
+    },
+    question: 'You\'re on first, one out. Shallow fly to left. What should you do?',
+    options: [
+      { id: 'a', text: 'Stay close to first and be ready to get back' },
+      { id: 'b', text: 'Tag up and go' },
+      { id: 'c', text: 'Run on contact' },
+      { id: 'd', text: 'Go halfway' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'On a shallow fly, stay close to first! You might get doubled off if caught. Be ready to get back safely. Don\'t venture far on short flies.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'tur-18',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'fly-ball-right',
+      throwDistance: 'long',
+    },
+    question: 'You\'re on first, no outs. Deep fly to right field corner. What do you do?',
+    options: [
+      { id: 'a', text: 'Go halfway - if it drops, you can get to third' },
+      { id: 'b', text: 'Tag and go to second' },
+      { id: 'c', text: 'Stay at first' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Go halfway on a deep fly to right! If it drops, you might make it to third. If caught, get back to first. Tagging from first rarely gains you much.',
+    errorVarianceApplies: false,
+  },
+  // Additional scenarios for Second Base tagging
+  {
+    id: 'tur-19',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'fly-ball-left',
+      throwDistance: 'long',
+    },
+    question: 'You\'re on second, no outs. Deep fly to left field. What\'s your play?',
+    options: [
+      { id: 'a', text: 'Tag up and advance to third after the catch' },
+      { id: 'b', text: 'Go halfway' },
+      { id: 'c', text: 'Stay at second' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Deep fly to left from second base - TAG! Left fielder has a long throw to third. You can easily advance and get into scoring position.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tur-20',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'fly-ball-right',
+      throwDistance: 'long',
+    },
+    question: 'You\'re on second, one out. Deep fly to right field. What do you do?',
+    options: [
+      { id: 'a', text: 'Tag up and go to third' },
+      { id: 'b', text: 'Go halfway' },
+      { id: 'c', text: 'Stay at second' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Right fielder has the longest throw to third! Tag up and advance on any deep fly to right. Get to third and be in scoring position.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tur-21',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'fly-ball-center',
+      throwDistance: 'short',
+    },
+    question: 'You\'re on second, no outs. Shallow fly to center. What\'s your read?',
+    options: [
+      { id: 'a', text: 'Go halfway - don\'t tag on shallow flies' },
+      { id: 'b', text: 'Tag and go' },
+      { id: 'c', text: 'Stay at second' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Shallow fly means go halfway! If it drops, advance. If caught, the throw to third is too short to tag. Play it smart.',
+    errorVarianceApplies: false,
+  },
+  // Additional scenarios for Third Base tagging
+  {
+    id: 'tur-22',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'fly-ball-right',
+      throwDistance: 'long',
+    },
+    question: 'You\'re on third, no outs. Deep fly to right field. What do you do?',
+    options: [
+      { id: 'a', text: 'Tag up and score after the catch' },
+      { id: 'b', text: 'Stay at third' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Deep fly to right gives you the longest throw home. Tag up and score! This is an easy sacrifice fly situation. Take the run.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tur-23',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'fly-ball-center',
+      throwDistance: 'medium',
+    },
+    question: 'You\'re on third, one out. Medium-depth fly to center. Should you tag?',
+    options: [
+      { id: 'a', text: 'Tag and go - test the outfielder\'s arm' },
+      { id: 'b', text: 'Stay at third' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'One out means be aggressive! Medium-depth fly to center is taggable. Test the arm - if it\'s close, you still have one out left if you\'re held.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'tur-24',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'fly-ball-left',
+      throwDistance: 'short',
+    },
+    question: 'You\'re on third, no outs. Shallow fly to left. What\'s the call?',
+    options: [
+      { id: 'a', text: 'Stay at third - throw is too short' },
+      { id: 'b', text: 'Tag and try to score' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Run on contact' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Shallow fly to left means a short throw home. Don\'t tag - you\'ll be thrown out easily. Wait for a deeper fly. You have no outs - be patient.',
+    errorVarianceApplies: false,
+  },
+  // Mixed base situations
+  {
+    id: 'tur-25',
+    category: 'tag-up-rules',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'fly-ball-right',
+      throwDistance: 'long',
+    },
+    question: 'Runners on first and second, no outs. Deep fly to right. You\'re on first. What do you do?',
+    options: [
+      { id: 'a', text: 'Go halfway and read it' },
+      { id: 'b', text: 'Tag and go to second' },
+      { id: 'c', text: 'Run on contact' },
+      { id: 'd', text: 'Stay at first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'As the runner on first, go halfway. The runner on second will likely tag and go to third. If the ball drops, you\'ll be in position to advance.',
+    errorVarianceApplies: false,
+  },
 ];

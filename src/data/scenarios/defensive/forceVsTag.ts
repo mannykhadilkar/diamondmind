@@ -316,4 +316,410 @@ export const forceVsTagScenarios: Scenario[] = [
       'With only a runner on third, there is NO force at home - you\'d need to tag the runner. The batter is a force at first. Get the guaranteed out at first to end the inning. Don\'t risk an error trying to get the runner at home.',
     errorVarianceApplies: true,
   },
+  // Additional Shortstop scenarios (need 3-5 more, currently 5)
+  {
+    id: 'fvt-16',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: false, third: true },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'shortstop',
+    },
+    question: 'Runners on corners, no outs, grounder to short. What\'s the priority?',
+    options: [
+      { id: 'a', text: 'Start the double play at second', targetBase: 'second' },
+      { id: 'b', text: 'Throw home for the force', targetBase: 'home' },
+      { id: 'c', text: 'Throw to first only', targetBase: 'first' },
+      { id: 'd', text: 'Tag the runner and throw to first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With runners on first and third, there\'s NO force at home. The runner on third doesn\'t have to go. Start the double play - getting two outs is worth giving up the run.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-17',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 1,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'shortstop',
+      runnerSpeed: 'slow',
+    },
+    question: 'Runner on first (slow), one out, grounder to short. Best play?',
+    options: [
+      { id: 'a', text: 'Turn the 6-4-3 double play', targetBase: 'second' },
+      { id: 'b', text: 'Throw to first for one out', targetBase: 'first' },
+      { id: 'c', text: 'Tag the runner' },
+      { id: 'd', text: 'Hold and check' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With one out and a slow runner, you still have time for the double play. Flip to second and let the pivot man turn two. A slow runner gives you extra time.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-18',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: true, third: true },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'shortstop',
+    },
+    question: 'Bases loaded, no outs, hard grounder to short. What\'s the smart play?',
+    options: [
+      { id: 'a', text: 'Throw home to cut off the run', targetBase: 'home' },
+      { id: 'b', text: 'Turn the double play at second', targetBase: 'second' },
+      { id: 'c', text: 'Throw to third', targetBase: 'third' },
+      { id: 'd', text: 'Throw to first', targetBase: 'first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With bases loaded and no outs, throw home! It\'s a force play, it prevents the run, and the catcher can still throw to first for the double play. Home is the priority.',
+    errorVarianceApplies: true,
+  },
+  // Additional Second Base scenarios (need 4-6 more, currently 4)
+  {
+    id: 'fvt-19',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'second-base',
+    },
+    question: 'Runner on first, no outs, grounder right at you. What\'s the play?',
+    options: [
+      { id: 'a', text: 'Step on second yourself, throw to first', targetBase: 'second' },
+      { id: 'b', text: 'Flip to shortstop at second', targetBase: 'second' },
+      { id: 'c', text: 'Throw to first only', targetBase: 'first' },
+      { id: 'd', text: 'Tag the runner coming from first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'When the ball is hit right at you, step on second yourself for the force, then throw to first for the double play. No need to flip when you\'re right there.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-20',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: true, third: true },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'second-base',
+    },
+    question: 'Runners on second and third, one out, grounder to second. What do you do?',
+    options: [
+      { id: 'a', text: 'Throw to first for the sure out', targetBase: 'first' },
+      { id: 'b', text: 'Throw home to get the runner', targetBase: 'home' },
+      { id: 'c', text: 'Throw to third', targetBase: 'third' },
+      { id: 'd', text: 'Hold and freeze the runners' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With no runner on first, there\'s no force at home or third. The runners can stay put or try to advance. Take the sure out at first base.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-21',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'ground-ball-middle',
+      fieldPosition: 'second-base',
+    },
+    question: 'Runners on first and second, no outs, grounder up the middle. You field it. Best play?',
+    options: [
+      { id: 'a', text: 'Flip to shortstop for the 4-6-3 double play', targetBase: 'second' },
+      { id: 'b', text: 'Throw to third for the force', targetBase: 'third' },
+      { id: 'c', text: 'Throw to first', targetBase: 'first' },
+      { id: 'd', text: 'Tag the runner and throw to first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With runners on first and second, start the double play! Flip to shortstop covering second, and they\'ll relay to first. Getting two outs is the priority.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-22',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: true, third: true },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'second-base',
+    },
+    question: 'Two outs, bases loaded, grounder to second. What\'s the quickest out?',
+    options: [
+      { id: 'a', text: 'Step on second for the force', targetBase: 'second' },
+      { id: 'b', text: 'Throw home', targetBase: 'home' },
+      { id: 'c', text: 'Throw to first', targetBase: 'first' },
+      { id: 'd', text: 'Throw to third', targetBase: 'third' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With two outs and bases loaded, any force out ends the inning. Stepping on second is the quickest - no throw required. Take the easy out.',
+    errorVarianceApplies: false,
+  },
+  // Additional Third Base scenarios (need 5-7 more, currently 3)
+  {
+    id: 'fvt-23',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'third-base',
+    },
+    question: 'Runners on first and second, no outs, grounder to third. Best double play?',
+    options: [
+      { id: 'a', text: 'Step on third, throw to first', targetBase: 'first' },
+      { id: 'b', text: 'Throw to second for the 5-4-3', targetBase: 'second' },
+      { id: 'c', text: 'Throw to first only', targetBase: 'first' },
+      { id: 'd', text: 'Tag the runner and throw to second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Stepping on third gives you the force out on the lead runner - no throw needed! Then fire to first for the 5-3 double play. Quickest double play from third.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-24',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'third-base',
+    },
+    question: 'One out, runner on second only, grounder to third. Runner is going to third. What do you do?',
+    options: [
+      { id: 'a', text: 'Tag the runner - no force at third', targetBase: 'third' },
+      { id: 'b', text: 'Throw to first for the out', targetBase: 'first' },
+      { id: 'c', text: 'Step on third for the force' },
+      { id: 'd', text: 'Hold and freeze the runner' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With only a runner on second, there\'s no force at third! You must TAG the runner. If they\'re running into your tag, make it. Otherwise throw to first for the sure out.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-25',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: true, third: true },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'third-base',
+    },
+    question: 'Bases loaded, no outs, grounder right at you at third. What\'s the play?',
+    options: [
+      { id: 'a', text: 'Step on third, throw home for the double play' },
+      { id: 'b', text: 'Throw home first, then to first', targetBase: 'home' },
+      { id: 'c', text: 'Throw to second', targetBase: 'second' },
+      { id: 'd', text: 'Throw to first', targetBase: 'first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Right at you at third with bases loaded - step on third for the easy force! Then fire home for the 5-2 double play. You remove the force at home by getting the out at third first.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-26',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 1,
+      runners: { first: true, second: false, third: true },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'third-base',
+    },
+    question: 'Runners on first and third, one out, grounder to third. Runner at third is staying. Play?',
+    options: [
+      { id: 'a', text: 'Throw to first for the out', targetBase: 'first' },
+      { id: 'b', text: 'Throw home', targetBase: 'home' },
+      { id: 'c', text: 'Tag the runner at third' },
+      { id: 'd', text: 'Start the double play at second', targetBase: 'second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'No force at third or home - the runner on third doesn\'t have to go. Take the sure out at first. Don\'t try to tag a runner who\'s staying put.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-27',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: true, third: true },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'third-base',
+    },
+    question: 'Runners on second and third, no outs, grounder to third. What\'s the play?',
+    options: [
+      { id: 'a', text: 'Throw to first for the out', targetBase: 'first' },
+      { id: 'b', text: 'Step on third for the force' },
+      { id: 'c', text: 'Throw home', targetBase: 'home' },
+      { id: 'd', text: 'Tag the runner from second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'No force at third or home with runners on second and third! The runners don\'t have to advance. Take the sure out at first base.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-28',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'ground-ball-left',
+      fieldPosition: 'third-base',
+      runnerSpeed: 'fast',
+    },
+    question: 'Two outs, runners on first and second, fast runner heading to third. Grounder to you. Play?',
+    options: [
+      { id: 'a', text: 'Step on third for the force', targetBase: 'third' },
+      { id: 'b', text: 'Throw to first', targetBase: 'first' },
+      { id: 'c', text: 'Tag the runner' },
+      { id: 'd', text: 'Throw to second', targetBase: 'second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With two outs, any out ends the inning. Stepping on third is the easiest - no throw needed, and even a fast runner has to beat you there.',
+    errorVarianceApplies: false,
+  },
+  // Additional First Base scenarios (need 5-7 more, currently 3)
+  {
+    id: 'fvt-29',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: true, third: true },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'first-base',
+    },
+    question: 'Bases loaded, no outs, grounder to first. What\'s the priority?',
+    options: [
+      { id: 'a', text: 'Throw home for the force', targetBase: 'home' },
+      { id: 'b', text: 'Step on first for one out', targetBase: 'first' },
+      { id: 'c', text: 'Throw to second', targetBase: 'second' },
+      { id: 'd', text: 'Throw to third', targetBase: 'third' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With bases loaded, home is a force! Throw home to cut off the run. The catcher can then fire to first for the double play. Prevent runs first.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-30',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 1,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'first-base',
+    },
+    question: 'Runner on first, one out, grounder to first. What\'s the play?',
+    options: [
+      { id: 'a', text: 'Step on first, look for the double play at second', targetBase: 'second' },
+      { id: 'b', text: 'Throw to second first', targetBase: 'second' },
+      { id: 'c', text: 'Step on first only', targetBase: 'first' },
+      { id: 'd', text: 'Tag the batter-runner' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Step on first to get the easy out. Then look to second - if the runner from first hesitated or is going back, you might get the double play.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-31',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: true, third: true },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'first-base',
+    },
+    question: 'Runners on second and third, no outs, grounder to first. What do you do?',
+    options: [
+      { id: 'a', text: 'Step on first for the out', targetBase: 'first' },
+      { id: 'b', text: 'Throw home', targetBase: 'home' },
+      { id: 'c', text: 'Throw to third', targetBase: 'third' },
+      { id: 'd', text: 'Hold and check the runners' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'No force at home or third! The runners don\'t have to advance. Step on first for the sure out. Don\'t throw home unless you\'re certain of a tag play.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-32',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 2,
+      runners: { first: true, second: false, third: true },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'first-base',
+    },
+    question: 'Two outs, runners on first and third, grounder to first. What\'s the play?',
+    options: [
+      { id: 'a', text: 'Step on first to end the inning', targetBase: 'first' },
+      { id: 'b', text: 'Throw home', targetBase: 'home' },
+      { id: 'c', text: 'Throw to second', targetBase: 'second' },
+      { id: 'd', text: 'Tag the batter' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Two outs - step on first to end the inning! Quickest out, no throw needed. The run doesn\'t score if you get the third out at first.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'fvt-33',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'first-base',
+      runnerSpeed: 'slow',
+    },
+    question: 'Runners on first and second (slow), no outs, grounder to first. Best play?',
+    options: [
+      { id: 'a', text: 'Step on first, throw to second for the double play', targetBase: 'second' },
+      { id: 'b', text: 'Throw to third', targetBase: 'third' },
+      { id: 'c', text: 'Step on first only', targetBase: 'first' },
+      { id: 'd', text: 'Throw to second first', targetBase: 'second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Step on first removes the force at second and third. But with slow runners, you might catch the runner from first going back or hesitating at second - look for the extra out!',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'fvt-34',
+    category: 'force-vs-tag',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'ground-ball-right',
+      fieldPosition: 'first-base',
+    },
+    question: 'Runner on third only, one out, grounder to first. Runner breaks for home. What do you do?',
+    options: [
+      { id: 'a', text: 'Step on first for the sure out', targetBase: 'first' },
+      { id: 'b', text: 'Throw home for the tag play', targetBase: 'home' },
+      { id: 'c', text: 'Chase the runner back' },
+      { id: 'd', text: 'Hold and see what happens' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'With one out, the run WILL count if the runner crosses home before you get the out at first. However, throwing home requires a tag play on a running player - risky! Take the sure out at first. Conceding one run to get a sure out is usually the right choice with one out.',
+    errorVarianceApplies: true,
+  },
 ];

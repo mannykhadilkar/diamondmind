@@ -302,4 +302,208 @@ export const groundBallReadsScenarios: Scenario[] = [
       'Two outs - be aggressive! Run hard and try to score. If the ball gets through, you should score easily. Even if it\'s fielded, they\'ll likely throw to first. Two outs means maximum aggression on the bases.',
     errorVarianceApplies: true,
   },
+  // Additional scenarios for First Base runners
+  {
+    id: 'gbr-16',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'ground-ball-right',
+    },
+    question: 'You\'re on first, no outs. Ground ball to second baseman. What do you do?',
+    options: [
+      { id: 'a', text: 'Run hard to second - you\'re forced' },
+      { id: 'b', text: 'Stop halfway' },
+      { id: 'c', text: 'Go back to first' },
+      { id: 'd', text: 'Wait to see if it\'s caught' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'You\'re forced to run! With a runner on first, any ground ball means you must go to second. Run hard and make them turn the double play - don\'t make it easy for them.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'gbr-17',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 1,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'ground-ball-left',
+    },
+    question: 'You\'re on first, one out. Hard grounder to third. What\'s your move?',
+    options: [
+      { id: 'a', text: 'Run hard to second - you\'re forced' },
+      { id: 'b', text: 'Stop and get in a rundown' },
+      { id: 'c', text: 'Go back to first' },
+      { id: 'd', text: 'Freeze and wait' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'You\'re forced to second on any ground ball. Run hard! Even if they turn the double play, your job is to run. Stopping wastes the batter\'s at-bat.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'gbr-18',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 0,
+      runners: { first: true, second: false, third: false },
+      battedBall: 'ground-ball-middle',
+    },
+    question: 'You\'re on first, no outs. Slow roller up the middle. What should you do?',
+    options: [
+      { id: 'a', text: 'Run hard, maybe you can make it to third if it gets through' },
+      { id: 'b', text: 'Stop at second no matter what' },
+      { id: 'c', text: 'Go back to first' },
+      { id: 'd', text: 'Walk to second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Run hard and read the play! If the ball gets through to center field, you might be able to make it all the way to third. Be aggressive but smart on base.',
+    errorVarianceApplies: true,
+  },
+  // Additional scenarios for Second Base runners
+  {
+    id: 'gbr-19',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'ground-ball-middle',
+    },
+    question: 'You\'re on second, no outs. Grounder up the middle. What do you do?',
+    options: [
+      { id: 'a', text: 'Read it - go to third if it gets through' },
+      { id: 'b', text: 'Run immediately to third' },
+      { id: 'c', text: 'Stay at second no matter what' },
+      { id: 'd', text: 'Go back toward first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'On a ball up the middle from second, read the play. If it gets through, advance to third. If it\'s fielded, stay put. Be ready to react either way.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'gbr-20',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'ground-ball-right',
+    },
+    question: 'You\'re on second, one out. Grounder to the right side. What\'s your move?',
+    options: [
+      { id: 'a', text: 'Go! Advance to third on ground balls to the right side' },
+      { id: 'b', text: 'Stay at second' },
+      { id: 'c', text: 'Freeze and watch' },
+      { id: 'd', text: 'Go halfway' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Ground ball to the right side? GO! The first or second baseman has their back to you while fielding. This is your automatic green light to advance.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'gbr-21',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: true, third: false },
+      battedBall: 'ground-ball-left',
+    },
+    question: 'You\'re on second, no outs. Grounder to shortstop. Do you advance?',
+    options: [
+      { id: 'a', text: 'Stay at second - shortstop can see you' },
+      { id: 'b', text: 'Run to third' },
+      { id: 'c', text: 'Go halfway and read it' },
+      { id: 'd', text: 'Go back toward first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Ground ball to the left side means stay! The shortstop can easily see third base and can throw you out. Wait for a ball to the right side to advance.',
+    errorVarianceApplies: false,
+  },
+  // Additional scenarios for Third Base runners
+  {
+    id: 'gbr-22',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'ground-ball-right',
+    },
+    question: 'You\'re on third, one out. Grounder to first baseman. What do you do?',
+    options: [
+      { id: 'a', text: 'Go halfway, break for home if throw goes to first' },
+      { id: 'b', text: 'Stay at third' },
+      { id: 'c', text: 'Run home on contact' },
+      { id: 'd', text: 'Tag up' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'Go halfway! The first baseman will likely step on first for the out. When they do, break for home - you can score on the ground ball to the right side.',
+    errorVarianceApplies: true,
+  },
+  {
+    id: 'gbr-23',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 0,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'ground-ball-left',
+    },
+    question: 'You\'re on third, no outs. Grounder to third baseman. What\'s your read?',
+    options: [
+      { id: 'a', text: 'Stay at third - no gamble with no outs' },
+      { id: 'b', text: 'Run home on contact' },
+      { id: 'c', text: 'Go halfway' },
+      { id: 'd', text: 'Tag up' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'No outs means don\'t gamble! Stay at third. The third baseman can look you back and still get the out at first. You have two more chances to score.',
+    errorVarianceApplies: false,
+  },
+  {
+    id: 'gbr-24',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 1,
+      runners: { first: false, second: false, third: true },
+      battedBall: 'ground-ball-middle',
+    },
+    question: 'You\'re on third, one out. Grounder to pitcher. What do you do?',
+    options: [
+      { id: 'a', text: 'Go halfway, read the play' },
+      { id: 'b', text: 'Stay at third' },
+      { id: 'c', text: 'Run on contact' },
+      { id: 'd', text: 'Go back to second' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'One out with a runner on third - go halfway on contact. If the pitcher throws to first, break for home. If they look at you, get back to third. Smart baserunning!',
+    errorVarianceApplies: true,
+  },
+  // Mixed runner situations
+  {
+    id: 'gbr-25',
+    category: 'ground-ball-reads',
+    situation: {
+      outs: 1,
+      runners: { first: true, second: true, third: false },
+      battedBall: 'ground-ball-middle',
+    },
+    question: 'Runners on first and second, one out. Grounder up the middle. You\'re on first. What do you do?',
+    options: [
+      { id: 'a', text: 'Run hard to second - you\'re forced' },
+      { id: 'b', text: 'Stop and get in a rundown' },
+      { id: 'c', text: 'Wait to see if it\'s through' },
+      { id: 'd', text: 'Go back to first' },
+    ],
+    correctOptionId: 'a',
+    explanation:
+      'You\'re forced! Run hard to second. Even if the double play is turned, running hard disrupts timing. Never slow down when you\'re forced.',
+    errorVarianceApplies: false,
+  },
 ];
